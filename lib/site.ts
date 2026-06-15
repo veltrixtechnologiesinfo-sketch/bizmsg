@@ -39,20 +39,48 @@ export function buildQuoteMessage(fields: {
   name: string;
   business: string;
   phone: string;
+  city?: string;
+  email?: string;
   service: string;
+  requirements?: string;
 }): string {
-  return `Assalam o Alaikum ${site.ownerName},
+  const details = [
+    `👤 Name: ${fields.name}`,
+    `🏢 Business: ${fields.business}`,
+    `📞 Phone: ${fields.phone}`,
+    fields.city?.trim() && `📍 City: ${fields.city.trim()}`,
+    fields.email?.trim() && `📧 Email: ${fields.email.trim()}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
 
-I would like to request a quotation for BizMsg WhatsApp messaging services. My details are as follows:
+  let msg = `Hello ${site.ownerName},
 
-• Name: ${fields.name}
-• Business: ${fields.business}
-• Contact Number: ${fields.phone}
-• Service of Interest: ${fields.service}
+I'm interested in BizMsg WhatsApp messaging services.
 
-Kindly share the pricing, features and onboarding process at your earliest convenience.
+📋 My Details:
+${details}
 
-Thank you.`;
+🎯 Plan Interest:
+✅ ${fields.service}`;
+
+  if (fields.requirements?.trim()) {
+    msg += `
+
+💬 Specific Requirements:
+${fields.requirements.trim()}`;
+  }
+
+  msg += `
+
+📅 Next Steps:
+Please share setup process, demo link, and any additional details.
+
+Looking forward to your response.
+
+— Sent via ${site.domain}`;
+
+  return msg;
 }
 
 /** Short, professional quotation request used by header / hero / floating buttons. */

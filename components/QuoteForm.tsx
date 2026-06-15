@@ -8,9 +8,9 @@ import { waLink, buildQuoteMessage, site } from "@/lib/site";
 import { WhatsAppIcon } from "./WaButton";
 
 const services = [
-  "Basic Plan (Rs 10,000)",
-  "Pro Plan (Rs 15,000)",
-  "Enterprise Plan (Rs 25,000)",
+  "Basic Plan (Rs 10,000/month — 5,000 messages)",
+  "Pro Plan (Rs 15,000/month — 10,000 messages)",
+  "Enterprise Plan (Rs 25,000/month — Unlimited)",
   "API Integration",
   "Custom / Not sure yet",
 ];
@@ -20,13 +20,18 @@ export function QuoteForm() {
     name: "",
     business: "",
     phone: "",
+    city: "",
+    email: "",
     service: services[1],
+    requirements: "",
   });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [shake, setShake] = useState(false);
 
   const update = (key: keyof typeof form) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     setForm((f) => ({ ...f, [key]: e.target.value }));
     setErrors((er) => ({ ...er, [key]: false }));
@@ -164,7 +169,34 @@ export function QuoteForm() {
                 </div>
                 <div>
                   <label className="mb-1.5 block text-sm font-semibold text-navy">
-                    Interested In
+                    City <span className="font-normal text-slate-400">(optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={form.city}
+                    onChange={update("city")}
+                    placeholder="e.g. Karachi"
+                    className={`${fieldBase} border-slate-200 focus:border-wa focus:ring-wa/15`}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-semibold text-navy">
+                    Email <span className="font-normal text-slate-400">(optional)</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={update("email")}
+                    placeholder="e.g. info@yourbusiness.com"
+                    className={`${fieldBase} border-slate-200 focus:border-wa focus:ring-wa/15`}
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-sm font-semibold text-navy">
+                    Plan Interest
                   </label>
                   <select
                     value={form.service}
@@ -178,6 +210,22 @@ export function QuoteForm() {
                     ))}
                   </select>
                 </div>
+              </div>
+
+              <div className="mt-5">
+                <label className="mb-1.5 block text-sm font-semibold text-navy">
+                  Specific Requirements{" "}
+                  <span className="font-normal text-slate-400">(optional)</span>
+                </label>
+                <textarea
+                  value={form.requirements}
+                  onChange={update("requirements")}
+                  rows={3}
+                  placeholder={
+                    "e.g. Need to send lab reports (PDF) to patients\nApproximately 200-300 reports per day\nIntegration with our existing system"
+                  }
+                  className={`${fieldBase} resize-none border-slate-200 focus:border-wa focus:ring-wa/15`}
+                />
               </div>
 
               <motion.button

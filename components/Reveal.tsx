@@ -6,12 +6,15 @@ import type { ReactNode } from "react";
 type Direction = "up" | "down" | "left" | "right" | "zoom";
 
 const offset: Record<Direction, { x?: number; y?: number; scale?: number }> = {
-  up: { y: 40 },
-  down: { y: -40 },
-  left: { x: 60 },
-  right: { x: -60 },
-  zoom: { scale: 0.85 },
+  up: { y: 50 },
+  down: { y: -50 },
+  left: { x: 70 },
+  right: { x: -70 },
+  zoom: { scale: 0.8 },
 };
+
+// Replay on every scroll-in, and only trigger once a good chunk is visible.
+const viewport = { once: false, amount: 0.25 } as const;
 
 export function Reveal({
   children,
@@ -31,7 +34,7 @@ export function Reveal({
       x: 0,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
@@ -41,7 +44,7 @@ export function Reveal({
       variants={variants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={viewport}
     >
       {children}
     </motion.div>
@@ -52,7 +55,7 @@ export function Reveal({
 export function RevealGroup({
   children,
   className,
-  stagger = 0.12,
+  stagger = 0.18,
 }: {
   children: ReactNode;
   className?: string;
@@ -63,7 +66,7 @@ export function RevealGroup({
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: false, amount: 0.15 }}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: stagger } },
@@ -88,16 +91,16 @@ export function RevealItem({
 }) {
   const boom = pop
     ? {
-        left: { x: -140, rotate: -8 },
-        right: { x: 140, rotate: 8 },
-        up: { y: 120 },
-        down: { y: -120 },
+        left: { x: -150, rotate: -6 },
+        right: { x: 150, rotate: 6 },
+        up: { y: 130 },
+        down: { y: -130 },
         zoom: {},
       }[direction]
     : offset[direction];
 
   const variants: Variants = {
-    hidden: { opacity: 0, scale: pop ? 0.4 : 1, ...boom },
+    hidden: { opacity: 0, scale: pop ? 0.5 : 1, ...boom },
     show: {
       opacity: 1,
       x: 0,
@@ -105,8 +108,9 @@ export function RevealItem({
       rotate: 0,
       scale: 1,
       transition: pop
-        ? { type: "spring", stiffness: 140, damping: 13, mass: 0.9 }
-        : { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        ? // slower, softer spring so the "boom" is clearly visible
+          { type: "spring", stiffness: 65, damping: 15, mass: 1.1 }
+        : { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
     },
   };
   return (
