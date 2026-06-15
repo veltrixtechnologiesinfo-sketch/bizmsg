@@ -31,9 +31,9 @@ export function FloatingWhatsApp() {
           }}
           whileHover={{ scale: 1.12 }}
           whileTap={{ scale: 0.9 }}
-          className="animate-pulse-ring fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-wa text-white shadow-2xl"
+          className="animate-pulse-ring fixed bottom-5 right-4 z-50 grid h-12 w-12 place-items-center rounded-full bg-wa text-white shadow-2xl ring-4 ring-white sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
         >
-          <WhatsAppIcon className="h-7 w-7" />
+          <WhatsAppIcon className="h-6 w-6 sm:h-7 sm:w-7" />
         </motion.a>
       )}
     </AnimatePresence>

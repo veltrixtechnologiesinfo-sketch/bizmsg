@@ -26,9 +26,9 @@ export function ScrollToTop() {
           transition={{ type: "spring", stiffness: 260, damping: 18 }}
           whileHover={{ scale: 1.12, y: -3 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-24 right-6 z-50 grid h-12 w-12 place-items-center rounded-full bg-navy text-white shadow-2xl ring-1 ring-white/20 transition-colors hover:bg-navy-light"
+          className="fixed bottom-[4.75rem] right-4 z-50 grid h-11 w-11 place-items-center rounded-full bg-navy text-white shadow-2xl ring-4 ring-white transition-colors hover:bg-navy-light sm:bottom-24 sm:right-6 sm:h-12 sm:w-12"
         >
-          <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg className="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 19V5" />
             <path d="M5 12l7-7 7 7" />
           </svg>
