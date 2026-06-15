@@ -9,7 +9,8 @@
   --color-wa-dark: #1da851;
   --color-wa-light: #4ae587;
 
-  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
 
   /* Keyframe animations */
   --animate-float: float 4s ease-in-out infinite;
@@ -76,6 +77,21 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Gradient text helper for headings */
+.text-gradient {
+  background: linear-gradient(120deg, #1e3a8a 0%, #25d366 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 /* ---- Reusable utility classes ---- */

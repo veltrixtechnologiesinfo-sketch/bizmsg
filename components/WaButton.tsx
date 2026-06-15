@@ -23,7 +23,7 @@ export function WaButton({
   variant?: "green" | "white" | "outline";
 }) {
   const base =
-    "btn-water group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold shadow-lg transition-shadow";
+    "btn-water group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition-shadow sm:px-7 sm:py-3.5 sm:text-base";
 
   const variants = {
     green:

@@ -1,12 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+// Body / UI font — clean, modern, highly readable for B2B.
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+// Display / heading font — geometric, confident, professional.
+const sora = Sora({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -50,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} h-full antialiased`}>
+    <html lang="en" className={`${jakarta.variable} ${sora.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white">{children}</body>
     </html>
   );

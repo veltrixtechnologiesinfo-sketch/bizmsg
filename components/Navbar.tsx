@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { site, waLink, quickQuoteMessage } from "@/lib/site";
 import { WaButton, WhatsAppIcon } from "./WaButton";
+import { BizLogo } from "./Logo";
 
 const links = [
   { href: "#features", label: "Features" },
@@ -24,6 +25,23 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Reliable smooth scroll with fixed-header offset (works on mobile + desktop).
+  const handleNav = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (!href.startsWith("#")) return;
+    e.preventDefault();
+    setOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top, behavior: "smooth" });
+      history.replaceState(null, "", href);
+    }
+  };
+
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
@@ -36,13 +54,17 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="flex items-center gap-2.5 group">
+        <a
+          href="#top"
+          onClick={(e) => handleNav(e, "#top")}
+          className="flex items-center gap-2.5 group"
+        >
           <motion.span
-            whileHover={{ rotate: [0, -12, 12, 0], scale: 1.1 }}
+            whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
             transition={{ duration: 0.5 }}
-            className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-navy to-wa text-white shadow-lg"
+            className="drop-shadow-lg"
           >
-            <WhatsAppIcon className="h-5 w-5" />
+            <BizLogo className="h-10 w-10" />
           </motion.span>
           <span
             className={`text-xl font-extrabold tracking-tight transition-colors ${
@@ -59,6 +81,7 @@ export function Navbar() {
             <li key={l.href}>
               <a
                 href={l.href}
+                onClick={(e) => handleNav(e, l.href)}
                 className={`relative text-sm font-medium transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-wa after:transition-all hover:after:w-full ${
                   scrolled
                     ? "text-slate-700 hover:text-navy"
@@ -126,8 +149,8 @@ export function Navbar() {
                 >
                   <a
                     href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-100 hover:text-navy"
+                    onClick={(e) => handleNav(e, l.href)}
+                    className="block rounded-lg px-3 py-3 text-base font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-navy active:bg-slate-100"
                   >
                     {l.label}
                   </a>

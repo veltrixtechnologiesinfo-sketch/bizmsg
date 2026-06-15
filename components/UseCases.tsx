@@ -94,7 +94,7 @@ export function UseCases() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-water inline-flex items-center gap-2 rounded-full bg-navy px-7 py-3.5 font-semibold text-white shadow-lg transition-transform hover:scale-105"
+            className="btn-water inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105 sm:px-7 sm:py-3.5 sm:text-base"
           >
             <span className="relative z-10">Don&apos;t see your industry? Ask us →</span>
           </a>

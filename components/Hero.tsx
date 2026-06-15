@@ -46,7 +46,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+            className="mt-5 text-[1.75rem] font-extrabold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
           >
             WhatsApp Messaging{" "}
             <span className="relative inline-block">
@@ -61,7 +61,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25 }}
-            className="mx-auto mt-6 max-w-xl text-lg text-blue-100/90 lg:mx-0"
+            className="mx-auto mt-5 max-w-xl text-base text-blue-100/90 sm:text-lg lg:mx-0"
           >
             {site.subtitle}
           </motion.p>
@@ -70,14 +70,19 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-9 flex flex-col items-center gap-4 sm:flex-row lg:justify-start justify-center"
+            className="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4 lg:justify-start justify-center"
           >
-            <WaButton href={waLink(quickQuoteMessage)} pulse float>
+            <WaButton
+              href={waLink(quickQuoteMessage)}
+              pulse
+              float
+              className="w-full sm:w-auto"
+            >
               <WhatsAppIcon className="h-5 w-5" /> Get Quote
             </WaButton>
             <a
               href="#pricing"
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-white/40 px-7 py-3.5 font-semibold text-white transition-all hover:border-white hover:bg-white/10"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/10 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base"
             >
               View Pricing
               <span className="transition-transform group-hover:translate-x-1">→</span>

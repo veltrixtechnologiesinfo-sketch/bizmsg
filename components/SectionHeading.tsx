@@ -19,14 +19,18 @@ export function SectionHeading({
         {eyebrow}
       </span>
       <h2
-        className={`mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl ${
+        className={`mt-4 text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl ${
           light ? "text-white" : "text-navy"
         }`}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-4 text-lg ${light ? "text-blue-100/80" : "text-slate-600"}`}>
+        <p
+          className={`mx-auto mt-4 max-w-xl text-sm sm:text-base md:text-lg ${
+            light ? "text-blue-100/80" : "text-slate-600"
+          }`}
+        >
           {subtitle}
         </p>
       )}

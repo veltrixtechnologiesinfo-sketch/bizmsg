@@ -2,6 +2,7 @@
 
 import { site, waLink, quickQuoteMessage } from "@/lib/site";
 import { WhatsAppIcon } from "./WaButton";
+import { BizLogo } from "./Logo";
 
 const navLinks = [
   { href: "#features", label: "Features" },
@@ -33,9 +34,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-wa to-wa-dark text-white shadow-lg">
-                <WhatsAppIcon className="h-5 w-5" />
-              </span>
+              <BizLogo className="h-11 w-11" />
               <span className="text-2xl font-extrabold">
                 Biz<span className="text-wa">Msg</span>
               </span>
