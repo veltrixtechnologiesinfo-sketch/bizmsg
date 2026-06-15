@@ -7,6 +7,7 @@ import { UseCases } from "@/components/UseCases";
 import { QuoteForm } from "@/components/QuoteForm";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <ScrollToTop />
     </>
   );
 }

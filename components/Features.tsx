@@ -64,8 +64,12 @@ export function Features() {
         />
 
         <RevealGroup className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <RevealItem key={f.title}>
+          {features.map((f, i) => (
+            <RevealItem
+              key={f.title}
+              pop
+              direction={(["left", "up", "right"] as const)[i % 3]}
+            >
               <div className="flip-card h-64 w-full" tabIndex={0}>
                 <div className="flip-inner rounded-2xl shadow-lg">
                   {/* Front */}

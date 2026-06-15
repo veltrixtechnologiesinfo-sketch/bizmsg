@@ -52,8 +52,12 @@ export function UseCases() {
         />
 
         <RevealGroup className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-          {cases.map((c) => (
-            <RevealItem key={c.title}>
+          {cases.map((c, i) => (
+            <RevealItem
+              key={c.title}
+              pop
+              direction={i % 2 === 0 ? "left" : "right"}
+            >
               <motion.div
                 whileHover={{ y: -10, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 260 }}
@@ -90,7 +94,7 @@ export function UseCases() {
         <div className="mt-14 text-center">
           <a
             href={waLink(
-              `Salam ${site.ownerName}, I run a business and want to use BizMsg. Please share details.`
+              `Assalam o Alaikum ${site.ownerName},\n\nI run a business and would like to use BizMsg for WhatsApp messaging. Kindly share the plans, pricing and details.\n\nThank you.`
             )}
             target="_blank"
             rel="noopener noreferrer"

@@ -34,22 +34,46 @@ export function waLink(message: string): string {
   return `https://wa.me/${site.phoneIntl}?text=${encodeURIComponent(message)}`;
 }
 
-/** Quote-request message in the format requested. */
+/** Detailed, professional quotation request built from the form fields. */
 export function buildQuoteMessage(fields: {
   name: string;
   business: string;
   phone: string;
   service: string;
 }): string {
-  return `Salam ${site.ownerName},
-I'd like to discuss BizMsg services.
-Name: ${fields.name}
-Business: ${fields.business}
-Phone: ${fields.phone}
-Interested in: ${fields.service}
-Please share details.`;
+  return `Assalam o Alaikum ${site.ownerName},
+
+I would like to request a quotation for BizMsg WhatsApp messaging services. My details are as follows:
+
+• Name: ${fields.name}
+• Business: ${fields.business}
+• Contact Number: ${fields.phone}
+• Service of Interest: ${fields.service}
+
+Kindly share the pricing, features and onboarding process at your earliest convenience.
+
+Thank you.`;
 }
 
-/** Generic "Get Quote" message used by header / hero buttons. */
-export const quickQuoteMessage = `Salam ${site.ownerName},
-I'd like to get a quote for BizMsg WhatsApp messaging services. Please share details.`;
+/** Short, professional quotation request used by header / hero / floating buttons. */
+export const quickQuoteMessage = `Assalam o Alaikum ${site.ownerName},
+
+I would like to request a quotation for BizMsg WhatsApp messaging services. Kindly share the available plans, pricing and setup details.
+
+Thank you.`;
+
+/** Professional quotation request for a specific pricing plan. */
+export function buildPlanMessage(plan: string, price: string): string {
+  return `Assalam o Alaikum ${site.ownerName},
+
+I am interested in the BizMsg ${plan} plan (Rs ${price}/month). Kindly share the complete details, features and the process to get started.
+
+Thank you.`;
+}
+
+/** Professional request for a custom / high-volume plan. */
+export const customPlanMessage = `Assalam o Alaikum ${site.ownerName},
+
+I require a custom BizMsg plan for higher messaging volume. Kindly share the available options and pricing.
+
+Thank you.`;

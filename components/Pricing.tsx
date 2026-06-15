@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { SectionHeading } from "./SectionHeading";
 import { RevealGroup, RevealItem } from "./Reveal";
-import { waLink, site } from "@/lib/site";
+import { waLink, buildPlanMessage, customPlanMessage } from "@/lib/site";
 import { WhatsAppIcon } from "./WaButton";
 
 const plans = [
@@ -50,12 +50,6 @@ const plans = [
   },
 ];
 
-function planMessage(plan: string, price: string) {
-  return `Salam ${site.ownerName},
-I'm interested in the BizMsg ${plan} plan (Rs ${price}/month).
-Please share details and how to get started.`;
-}
-
 export function Pricing() {
   return (
     <section id="pricing" className="relative bg-white py-20 sm:py-28">
@@ -71,8 +65,13 @@ export function Pricing() {
         />
 
         <RevealGroup className="grid items-stretch gap-8 lg:grid-cols-3">
-          {plans.map((p) => (
-            <RevealItem key={p.name} className="h-full">
+          {plans.map((p, i) => (
+            <RevealItem
+              key={p.name}
+              className="h-full"
+              pop
+              direction={(["left", "up", "right"] as const)[i % 3]}
+            >
               <motion.div
                 whileHover={{ y: -10 }}
                 transition={{ type: "spring", stiffness: 250 }}
@@ -139,7 +138,7 @@ export function Pricing() {
                 </ul>
 
                 <a
-                  href={waLink(planMessage(p.name, p.price))}
+                  href={waLink(buildPlanMessage(p.name, p.price))}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`btn-water mt-8 flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold transition-transform hover:scale-[1.03] ${
@@ -160,7 +159,7 @@ export function Pricing() {
         <p className="mt-10 text-center text-slate-500">
           Need a custom volume?{" "}
           <a
-            href={waLink(`Salam ${site.ownerName}, I need a custom BizMsg plan. Please share details.`)}
+            href={waLink(customPlanMessage)}
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-wa-dark underline-offset-4 hover:underline"

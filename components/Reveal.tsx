@@ -78,19 +78,35 @@ export function RevealItem({
   children,
   className,
   direction = "up",
+  pop = false,
 }: {
   children: ReactNode;
   className?: string;
   direction?: Direction;
+  /** Dramatic "boom" entrance — flies in from the edge and springs into place. */
+  pop?: boolean;
 }) {
+  const boom = pop
+    ? {
+        left: { x: -140, rotate: -8 },
+        right: { x: 140, rotate: 8 },
+        up: { y: 120 },
+        down: { y: -120 },
+        zoom: {},
+      }[direction]
+    : offset[direction];
+
   const variants: Variants = {
-    hidden: { opacity: 0, ...offset[direction] },
+    hidden: { opacity: 0, scale: pop ? 0.4 : 1, ...boom },
     show: {
       opacity: 1,
       x: 0,
       y: 0,
+      rotate: 0,
       scale: 1,
-      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+      transition: pop
+        ? { type: "spring", stiffness: 140, damping: 13, mass: 0.9 }
+        : { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
     },
   };
   return (
