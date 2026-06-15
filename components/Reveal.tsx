@@ -91,10 +91,10 @@ export function RevealItem({
 }) {
   const boom = pop
     ? {
-        left: { x: -150, rotate: -6 },
-        right: { x: 150, rotate: 6 },
-        up: { y: 130 },
-        down: { y: -130 },
+        left: { x: -90, rotate: -5 },
+        right: { x: 90, rotate: 5 },
+        up: { y: 110 },
+        down: { y: -110 },
         zoom: {},
       }[direction]
     : offset[direction];
