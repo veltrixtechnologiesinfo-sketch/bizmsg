@@ -25,7 +25,8 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Reliable smooth scroll with fixed-header offset (works on mobile + desktop).
+  // Reliable smooth scroll (works on mobile + desktop). scrollIntoView respects
+  // the `scroll-padding-top` set in globals.css, so the fixed header never overlaps.
   const handleNav = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
@@ -33,13 +34,20 @@ export function Navbar() {
     if (!href.startsWith("#")) return;
     e.preventDefault();
     setOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      const top =
-        el.getBoundingClientRect().top + window.scrollY - 72;
-      window.scrollTo({ top, behavior: "smooth" });
-      history.replaceState(null, "", href);
-    }
+
+    const doScroll = () => {
+      if (href === "#top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        document
+          .querySelector(href)
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      history.replaceState(null, "", href === "#top" ? " " : href);
+    };
+
+    // Defer past the drawer-close re-render so the smooth scroll isn't cancelled.
+    setTimeout(doScroll, 60);
   };
 
   return (
